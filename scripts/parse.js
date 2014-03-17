@@ -5,8 +5,7 @@ require([
     'use strict';
 
     var initialize = function () {
-        // Parse.initialize("app_id", "app_key");
-        Parse.initialize("i4JilOIIdZOU9dRiWUs2UNGm9l6aL99maP24CP8Z", "rP49755ihEOkcCsOXGhA3Q9aalKster1728S3DBl");
+        Parse.initialize("app_id", "app_key"); 
         app.getTracks();
     };
 

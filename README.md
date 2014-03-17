@@ -1,4 +1,6 @@
-Start app
+Install app
 ===============
 
-spotify:app:noisegong
+* Place in /˜/Spotify/noisegong
+* Search for "spotify:app:noisegong" in Spotify App Search
+* Add to favorites
