@@ -1,11 +1,11 @@
 require([
     '$api/models',
-  	'$views/image#Image', 
+    '$views/image#Image',
 ], function (models, Image) {
     'use strict';
 
-    var initialize = function (config) {  
-        Parse.initialize(config.app_id, config.app_key); 
+    var initialize = function (config) {
+        Parse.initialize(config.app_id, config.app_key);
         app.getTracks();
     };
 
@@ -21,7 +21,7 @@ require([
 
                     for (var i = 0; i < 1; i++) {
                         var track = results[i];
-                        var track_id = models.Track.fromURI(track.get('spotify_id')); 
+                        var track_id = models.Track.fromURI(track.get('spotify_id'));
 
                         models.player.playTrack(track_id);
 
