@@ -1,11 +1,11 @@
 require([
     '$api/models',
-  	'$views/image#Image'
+  	'$views/image#Image', 
 ], function (models, Image) {
     'use strict';
 
-    var initialize = function () {
-        Parse.initialize("app_id", "app_key"); 
+    var initialize = function (config) {  
+        Parse.initialize(config.app_id, config.app_key); 
         app.getTracks();
     };
 

@@ -1,7 +1,8 @@
 require([ 
   '$api/models',
+  'scripts/config',
   'scripts/parse'
-], function(models, parse, languageExample) {
-  'use strict'; 
-    parse.initialize();  
+], function(models, config, parse, languageExample) {
+  'use strict';  
+    parse.initialize(config.data);  
 });
