@@ -1,23 +1,23 @@
 require([
     '$api/models',
     '$views/image#Image',
-], function(models, Image) {
+], function (models, Image) {
     'use strict';
 
-    var initialize = function(config) {
+    var initialize = function (config) {
         Parse.initialize(config.app_id, config.app_key);
         app.getTracks();
     };
 
     var app = {
-        getTracks: function() {
+        getTracks: function () {
 
             var Track = Parse.Object.extend("track");
             var query = new Parse.Query(Track);
             query.descending("createdAt");
 
             query.find({
-                success: function(results) {
+                success: function (results) {
 
                     for (var i = 0; i < 1; i++) {
                         var track = results[i];
@@ -34,12 +34,12 @@ require([
 
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     alert("Error: " + error.code + " " + error.message);
                 }
             });
         }
-    };
+    }
 
     exports.initialize = initialize;
 });
