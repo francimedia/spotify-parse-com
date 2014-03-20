@@ -12,8 +12,11 @@ class submitVote {
 	private $current_round_id;
 
 	public function __construct() {
-		include(dirname(__FILE__).'/config.php'); 
-		$this->firebase = new Firebase($config['firebase_url'], $config['firebase_auth_token']); 
+		$config_file = dirname(__FILE__).'/config.php';
+		if(file_exists($config_file)) {
+			include($config_file); 	
+		} 
+		$this->firebase = new Firebase(firebase_url, firebase_auth_token);  
 	}	 
 
 	public function run() {
@@ -70,6 +73,10 @@ class submitVote {
 	private function alreadyVoted() {
 
 		$votes = json_decode($this->firebase->get('votes/'.$this->getCurrentRoundId()));
+
+		if(!$votes || !is_array($votes)) {
+			return;
+		}
 
 	  	foreach ($votes as $key => $vote) {
 	  		if($vote->device_id == $this->getDeviceId()) {
