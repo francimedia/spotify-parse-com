@@ -79,12 +79,12 @@ class submitVote
     private function alreadyVoted()
     {
         
-        $votes = json_decode($this->firebase->get('votes/' . $this->getCurrentRoundId()));
-        
-        if (!$votes || !is_array($votes)) {
-            return;
+        $votes = (array) json_decode($this->firebase->get('votes/' . $this->getCurrentRoundId()));
+
+        if (!$votes || count($votes) == 0) {
+            return false;
         }
-        
+
         foreach ($votes as $key => $vote) {
             if ($vote->device_id == $this->getDeviceId()) {
                 return true;
