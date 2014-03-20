@@ -1,1 +1,1 @@
-web:    sh www/heroku/web-boot.sh
+web:    sh www/proxy/heroku/web-boot.sh
