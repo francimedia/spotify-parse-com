@@ -1,8 +1,8 @@
 require([
-    '$api/models',
-    'scripts/config',
-    'scripts/spotify'
-], function(models, config, spotify, languageExample) {
-    'use strict';
-    spotify.initialize();
+  '$api/models',
+  'scripts/config',
+  'scripts/app'
+], function(models, config, app) {
+  'use strict';
+    app.initialize(config.data);
 });
