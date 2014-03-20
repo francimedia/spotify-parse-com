@@ -16,7 +16,7 @@ require([
 
         app.listenToVotes();
 
-        
+
         spotify.init();
 
     };
@@ -107,7 +107,8 @@ require([
                 }
 
                 // skip to next track
-                models.player.skipToNextTrack();
+                // models.player.skipToNextTrack();
+                spotify.playNext();
 
                 // init a new round
                 app.initNewRound(function() {
