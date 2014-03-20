@@ -55,7 +55,7 @@ require([
                 return this;
             },
             init: function() {
-                spotify.dom.next.on('click', spotify.playNext);
+                // spotify.dom.next.on('click', spotify.playNext);
                 spotify.getPlaylist();
                 spotify.nowPlaying();
             }
