@@ -17,8 +17,6 @@ require([
     spotify.player = models.player;
     spotify.playlist = models.Playlist.fromURI('spotify:user:billboard.com:playlist:6UeSakyzhiEt4NB3UAd6NQ');
 
-    // console.log(spotify.player);
-    // console.log(spotify.playlist);
 
     // DOM elements
     spotify.dom = {
@@ -32,6 +30,7 @@ require([
         getPlaylist: function() {
             var list = List.forPlaylist(spotify.playlist);
             spotify.dom.playlistPlayer.append(list.node);
+
             list.init();
         },
         nowPlaying: function() {
@@ -63,16 +62,15 @@ require([
             });
         },
         playNext: function() {
-            console.log(spotify.player);
-            spotify.player.shuffle = true;
             spotify.player.skipToNextTrack();
-            console.log(spotify.player);
         },
         bind: function(){
-
             spotify.dom.next.on('click', app.playNext);
         }
     };
+
+    // TODO: When the voting skip reaches is limit, call app.playNext
+    // TODO: Impliment shuffling
 
     exports.initialize = initialize;
 });
