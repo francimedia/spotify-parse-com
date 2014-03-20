@@ -5,72 +5,65 @@ require([
 ], function(models, Image, List) {
     'use strict';
 
-    var initialize = function(config) {
-        // Parse.initialize(config.app_id, config.app_key);
-        // app.getTracks();
-        app.getPlaylist();
-        app.nowPlaying();
-        app.bind();
-    };
+    var Spotify = (function() {
+        var spotify = {
+            player: models.player,
+            playlist: models.Playlist.fromURI('spotify:user:billboard.com:playlist:6UeSakyzhiEt4NB3UAd6NQ'),
+            dom: {
+                next: $('#next'),
+                np: $('#np'),
+                singlePlayer: $('#single-track-player'),
+                playlistPlayer: $('#playlist-player')
+            },
+            getPlaylist: function() {
+                var list = List.forPlaylist(spotify.playlist);
+                spotify.dom.playlistPlayer.append(list.node);
+                list.init();
+            },
+            nowPlaying: function() {
+                var nowPlaying = spotify.dom.np;
+                var npTrack, npTrackImage;
 
-    var spotify = this;
-    spotify.player = models.player;
-    spotify.playlist = models.Playlist.fromURI('spotify:user:billboard.com:playlist:6UeSakyzhiEt4NB3UAd6NQ');
+                function updateStatus(track) {
+                    npTrack = models.Track.fromURI(track.uri);
+                    npTrackImage = Image.forTrack(npTrack, {
+                        player: true
+                    });
 
+                    if (track === null) {
+                        nowPlaying.html('No track currently playing');
+                    } else {
+                        nowPlaying.html('Now playing: ' + track.name);
 
-    // DOM elements
-    spotify.dom = {
-        next: $('#next'),
-        np: $('#np'),
-        singlePlayer: $('#single-track-player'),
-        playlistPlayer: $('#playlist-player')
-    };
-
-    var app = {
-        getPlaylist: function() {
-            var list = List.forPlaylist(spotify.playlist);
-            spotify.dom.playlistPlayer.append(list.node);
-
-            list.init();
-        },
-        nowPlaying: function() {
-            var nowPlaying = spotify.dom.np;
-            var npTrack, npTrackImage;
-
-            function updateStatus(track) {
-                npTrack = models.Track.fromURI(track.uri);
-                npTrackImage = Image.forTrack(npTrack, {
-                    player: true
+                        spotify.dom.singlePlayer.empty().append(npTrackImage.node);
+                    }
+                }
+                // update on load
+                spotify.player.load('track').done(function(p) {
+                    updateStatus(p.track);
                 });
 
-                if (track === null) {
-                    nowPlaying.html('No track currently playing');
-                } else {
-                    nowPlaying.html('Now playing: ' + track.name);
+                // update on change
+                spotify.player.addEventListener('change', function(p) {
+                    updateStatus(p.data.track);
+                });
 
-                    spotify.dom.singlePlayer.empty().append(npTrackImage.node);
-                }
+                return this;
+            },
+            playNext: function() {
+                spotify.player.skipToNextTrack();
+                return this;
+            },
+            init: function() {
+                spotify.dom.next.on('click', spotify.playNext);
+                spotify.getPlaylist();
+                spotify.nowPlaying();
             }
-            // update on load
-            spotify.player.load('track').done(function(p) {
-                updateStatus(p.track);
-            });
+        };
 
-            // update on change
-            spotify.player.addEventListener('change', function(p) {
-                updateStatus(p.data.track);
-            });
-        },
-        playNext: function() {
-            spotify.player.skipToNextTrack();
-        },
-        bind: function(){
-            spotify.dom.next.on('click', app.playNext);
-        }
-    };
+        return spotify;
+    })();
 
-    // TODO: When the voting skip reaches is limit, call app.playNext
-    // TODO: Impliment shuffling
 
-    exports.initialize = initialize;
+    exports.Spotify = Spotify;
 });
