@@ -10,8 +10,8 @@ Install app
 * Install Heroku > https://toolbelt.herokuapp.com/ 
 * Create a new heroku app ("heroku apps:create example")
 * Navigate to project root and execute:
-*   heroku config:set firebase_auth_token=xxx
-*   heroku config:set firebase_url=https://APP_URL.firebaseio.com/
+* "heroku config:set firebase_auth_token=xxx"
+* "heroku config:set firebase_url=https://APP_URL.firebaseio.com/"
 * Place source code (project root) in /˜/Spotify/noisegong
 * Search for "spotify:app:noisegong" in Spotify App Search
 * Add to favorites 
