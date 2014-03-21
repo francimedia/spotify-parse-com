@@ -54,7 +54,7 @@ require([
                 spotify.player.skipToNextTrack();
                 return this;
             },
-            init: function() {
+            initialize: function() {
                 // spotify.dom.next.on('click', spotify.playNext);
                 spotify.getPlaylist();
                 spotify.nowPlaying();
