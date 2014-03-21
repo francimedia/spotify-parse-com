@@ -4,7 +4,7 @@ require([
 ], function(models, spotify) {
     'use strict';
 
-    var FBase = (function() {
+    exports.FBase = (function() {
         var fbase = {
             min_votes: 3,
             device_id: 'spotify_app_dev',
@@ -119,5 +119,5 @@ require([
         return fbase;
     })();
 
-    exports.FBase = FBase;
+
 });

@@ -5,7 +5,7 @@ require([
 ], function(models, Image, List) {
     'use strict';
 
-    var Spotify = (function() {
+    exports.Spotify = (function() {
         var spotify = {
             player: models.player,
             playlist: models.Playlist.fromURI('spotify:user:billboard.com:playlist:6UeSakyzhiEt4NB3UAd6NQ'),
@@ -63,7 +63,5 @@ require([
 
         return spotify;
     })();
-
-
-    exports.Spotify = Spotify;
+    
 });
