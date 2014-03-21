@@ -16,12 +16,13 @@ require([
                 spotify.initialize();
             },
             createSchema: function(callback) {
-                fbase.initNewRound(1, callback);
+                // fbase.initNewRound(1, callback);
+                fbase.insertRound(1, callback);
             },
             getCurrentRound: function(callback) {
                 var roundsRef = fbase.fb.child('rounds').limit(1);
                 roundsRef.once('value', function(snapshot) {
-                    if (snapshot.val() === null) {
+                    if (!snapshot.val()) {
                         fbase.createSchema(function() {
                             fbase.getCurrentRound(callback);
                         });
@@ -43,7 +44,7 @@ require([
             },
 
             insertRound: function(id, callback) {
-                var roundsRef = fbase.child('rounds').push();
+                var roundsRef = fbase.fb.child('rounds').push();
 
                 roundsRef.setWithPriority({
                     id: id,
