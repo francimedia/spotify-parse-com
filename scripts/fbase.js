@@ -13,6 +13,7 @@ require([
             initialize: function(config) {
                 fbase.fb = new Firebase('https://noise-gong.firebaseio.com/');
                 fbase.listenToVotes();
+                spotify.initialize();
             },
             createSchema: function(callback) {
                 fbase.initNewRound(1, callback);
