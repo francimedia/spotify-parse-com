@@ -1,8 +1,7 @@
 require([
-  '$api/models',
-  'scripts/config',
-  'scripts/app'
-], function(models, config, app) {
-  'use strict';
-    app.initialize(config.data);
+    'scripts/config',
+    'scripts/fbase#FBase'
+], function(config, fBase) {
+    'use strict';
+    fBase.initialize(config.data);
 });
