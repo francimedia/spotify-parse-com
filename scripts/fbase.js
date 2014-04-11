@@ -93,6 +93,8 @@ require([
 
                 fbase.votesListenerRef.once('value', function(snapshot) {
 
+                    fbase.updateVoteIndicator(snapshot.numChildren(), fbase.min_votes);
+
                     if (snapshot.numChildren() < fbase.min_votes) {
                         return false;
                     }
@@ -114,6 +116,10 @@ require([
                 for (var key in snapshot.val()) {
                     return snapshot.val()[key];
                 }
+            },
+            updateVoteIndicator: function(current, total){
+                $('#votes-current').text(current);
+                $('#votes-total').text(total);
             }
 
         };
