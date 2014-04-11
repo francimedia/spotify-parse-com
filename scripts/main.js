@@ -1,8 +1,7 @@
-require([ 
-  '$api/models',
-  'scripts/config',
-  'scripts/parse'
-], function(models, config, parse, languageExample) {
-  'use strict';  
-    parse.initialize(config.data);  
+require([
+    'scripts/config',
+    'scripts/fbase#FBase'
+], function(config, fBase) {
+    'use strict';
+    fBase.initialize(config.data);
 });

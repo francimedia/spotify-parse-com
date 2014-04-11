@@ -1,0 +1,1 @@
+<?php // fake index php for heroku
